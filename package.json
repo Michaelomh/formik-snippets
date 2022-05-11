@@ -8,9 +8,13 @@
     "export": "next export"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.1.7",
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@fontsource/inter": "^4.5.10",
+    "@fontsource/roboto-mono": "^4.5.7",
+    "@radix-ui/react-icons": "^1.1.1",
     "@types/jest": "^27.5.0",
     "@types/node": "^17.0.31",
     "@types/react": "^18.0.8",

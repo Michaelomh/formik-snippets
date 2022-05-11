@@ -1,4 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
+import { ChevronRightIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 type SidebarHeaderProps = {
   children: React.ReactNode;
@@ -12,10 +14,15 @@ type SidebarHeaderProps = {
  * add icons for expand and hide
  */
 export default function SidebarHeader({ children, headerTitle }: SidebarHeaderProps) {
+  const [isExpanded, setExpanded] = useState(true);
+
   return (
-    <Flex flexDir="column" w="100%">
-      <Text>{headerTitle}</Text>
-      {children}
+    <Flex flexDir="column" w="100%" onClick={() => setExpanded((prevState) => !prevState)}>
+      <Text fontFamily="inter">
+        {isExpanded ? <ChevronDownIcon d="inline" mr={4} /> : <ChevronRightIcon d="inline" mr={4} />}
+        {headerTitle} - {isExpanded.toString()}
+      </Text>
+      {isExpanded && children}
     </Flex>
   );
 }
