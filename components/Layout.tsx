@@ -5,7 +5,7 @@ export default function Layout({ children }) {
   return (
     <Flex w="100vw" h="100vh" flexDir="row">
       <Sidebar />
-      <Box w="75%">{children}</Box>
+      <Box w="100%">{children}</Box>
     </Flex>
   );
 }
