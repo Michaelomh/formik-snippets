@@ -1,11 +1,22 @@
-import { Box, Flex } from "@chakra-ui/react";
-import Sidebar from "./sidebar/Sidebar";
+import { Grid, GridItem } from '@chakra-ui/react'
+import Head from './Head'
+import Sidebar from './sidebar/Sidebar'
 
 export default function Layout({ children }) {
   return (
-    <Flex w="100vw" h="100vh" flexDir="row">
-      <Sidebar />
-      <Box w="100%">{children}</Box>
-    </Flex>
-  );
+    <>
+      <Head />
+      <Grid
+        w="100vw"
+        h="100vh"
+        templateRows="50% 50%"
+        templateColumns="minmax(300px, 400px) 1fr  1fr"
+      >
+        <GridItem rowSpan={2}>
+          <Sidebar />
+        </GridItem>
+        {children}
+      </Grid>
+    </>
+  )
 }

@@ -1,27 +1,40 @@
-import Image from "next/image";
-import { useRouter } from "next/router";
-import { Box, Button, Flex, Heading } from "@chakra-ui/react";
-import SidebarHeader from "./SidebarHeader";
-import SidebarLink from "./SidebarLink";
+import { Box, Button, Flex } from '@chakra-ui/react'
+import Image from 'next/image'
+import SidebarHeader from './SidebarHeader'
+import SidebarLink from './SidebarLink'
 
 export default function Sidebar() {
-  const router = useRouter();
-  const pathName = router.pathname.split("/")[1];
-  console.log(pathName);
-
   return (
-    <Box w="25%" maxWidth={"400px"} minW="300px" h="100%" bg="purple.500" color="white" pos="relative">
+    <Box
+      w="100%"
+      minW="300px"
+      h="100%"
+      bg="purple.500"
+      color="white"
+      pos="relative"
+    >
       <Box w="100%" h="100px" pos="relative">
-        <Image layout="fill" objectFit="cover" alt="Formik + Yup React Snippets Logo" src="/Logo.png" />
+        <Image
+          layout="fill"
+          objectFit="cover"
+          alt="Formik + Yup React Snippets Logo"
+          src="/Logo.png"
+        />
       </Box>
-      <Flex flexDir={"column"} w="100%">
+      <Flex flexDir={'column'} w="100%">
         <SidebarHeader headerTitle="Formik Example">
-          <SidebarLink linkTitle="Login Form" />
-          <SidebarLink linkTitle="New Account Form" />
-          <SidebarLink linkTitle="Add transaction Form" />
+          <SidebarLink linkTitle="Login Form" link="/useFormik/login-form" />
+          <SidebarLink
+            linkTitle="New Account Form"
+            link="/useFormik/new-account"
+          />
+          <SidebarLink
+            linkTitle="Add transaction Form"
+            link="/useFormik/transaction-form"
+          />
         </SidebarHeader>
         <SidebarHeader headerTitle="Kitchen Sink">
-          <SidebarLink linkTitle="<Form>" />
+          <SidebarLink linkTitle="<Form>" link="useformik/form" />
           <SidebarLink linkTitle="<Input>" />
           <SidebarLink linkTitle="<Field>" />
           <SidebarLink linkTitle="Button" />
@@ -42,5 +55,5 @@ export default function Sidebar() {
         </Button>
       </Box>
     </Box>
-  );
+  )
 }
