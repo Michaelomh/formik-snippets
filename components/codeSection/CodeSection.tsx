@@ -7,20 +7,21 @@ type codeSectionProps = {
 export default function CodeSection({ code }: codeSectionProps) {
   if (!code) {
     return (
-      <GridItem
-        w="100%"
-        h="100%"
-        colSpan={2}
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center"
-        p={4}
-        textAlign="center"
-        bg="green.100"
-        display="flex"
-      >
-        <Text>View your render components here. </Text>
-        <Text>Select from the sidebar to see formik in action.</Text>
+      <GridItem w="100%" h="100%" colSpan={2} bgColor="blackAlpha.800">
+        <Flex flexDir="row" w="100%" h="100%" overflow="auto" color="white">
+          <Box color="white" bg="blackAlpha.600" p={4} h="100%" w="50px" />
+          <Flex
+            flexDir="column"
+            alignItems="center"
+            justifyContent="center"
+            w="100%"
+          >
+            <Text as="pre">View your render components here. </Text>
+            <Text as="pre">
+              Select from the sidebar to see formik in action.
+            </Text>
+          </Flex>
+        </Flex>
       </GridItem>
     )
   }

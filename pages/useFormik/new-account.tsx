@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Checkbox,
   Flex,
   FormControl,
   FormLabel,
@@ -19,8 +18,7 @@ export default function NewAccount() {
     initialValues: {
       firstName: '',
       lastName: '',
-      email: '',
-      phoneNumber: '',
+      age: '',
       password: '',
       confirmPassword: '',
     },
@@ -30,16 +28,7 @@ export default function NewAccount() {
   })
   return (
     <Layout>
-      <GridItem
-        display="flex"
-        w="100%"
-        h="100%"
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center"
-        p={4}
-        bg="gray.100"
-      >
+      <GridItem w="100%" h="100%" pt={8} bg="gray.100" overflow="auto">
         <Flex align="center" justify="center">
           <Box bg="white" p={6} rounded="md">
             <form onSubmit={formik.handleSubmit}>
@@ -74,7 +63,7 @@ export default function NewAccount() {
                     type="number"
                     variant="filled"
                     onChange={formik.handleChange}
-                    value={formik.values.phoneNumber}
+                    value={formik.values.age}
                   />
                 </FormControl>
                 <FormControl>
@@ -111,40 +100,54 @@ export default function NewAccount() {
       </GridItem>
       <PropsSection props={formik} />
       <CodeSection
-        code={`<form onSubmit={formik.handleSubmit}>
-            <FormControl>
-              <FormLabel htmlFor="email">Email Address</FormLabel>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="password">Password</FormLabel>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                onChange={formik.handleChange}
-                value={formik.values.password}
-              />
-            </FormControl>
-            <Checkbox
-              id="rememberMe"
-              name="rememberMe"
-              onChange={formik.handleChange}
-              isChecked={formik.values.rememberMe}
-              colorScheme="purple"
-            >
-              Remember me?
-            </Checkbox>
-            <Button type="submit" colorScheme="purple" width="full">
-              Login
-            </Button>
-          </form>`}
+        code={`const formik = useFormik({
+  initialValues: {
+    firstName: '',
+    lastName: '',
+    age: '',
+    password: '',
+    confirmPassword: '',
+  },
+  onSubmit: (values) => {
+    alert(JSON.stringify(values, null, 2))
+},
+
+....
+
+<form onSubmit={formik.handleSubmit}>
+  <FormControl>
+    <FormLabel htmlFor="email">Email Address</FormLabel>
+    <Input
+      id="email"
+      name="email"
+      type="email"
+      onChange={formik.handleChange}
+      value={formik.values.email}
+    />
+  </FormControl>
+  <FormControl>
+    <FormLabel htmlFor="password">Password</FormLabel>
+    <Input
+      id="password"
+      name="password"
+      type="password"
+      onChange={formik.handleChange}
+      value={formik.values.password}
+    />
+  </FormControl>
+  <Checkbox
+    id="rememberMe"
+    name="rememberMe"
+    onChange={formik.handleChange}
+    isChecked={formik.values.rememberMe}
+    colorScheme="purple"
+  >
+    Remember me?
+  </Checkbox>
+  <Button type="submit" colorScheme="purple" width="full">
+    Login
+  </Button>
+</form>`}
       />
     </Layout>
   )

@@ -12,9 +12,7 @@ export default function Layout({ children }) {
         templateRows="50% 50%"
         templateColumns="minmax(300px, 400px) 1fr  1fr"
       >
-        <GridItem rowSpan={2}>
-          <Sidebar />
-        </GridItem>
+        <Sidebar />
         {children}
       </Grid>
     </>
