@@ -7,18 +7,21 @@ type propsSectionProps = {
 export default function PropsSection({ props }: propsSectionProps) {
   if (!props) {
     return (
-      <GridItem
-        w="100%"
-        h="100%"
-        display="flex"
-        flexDir="column"
-        alignItems="center"
-        justifyContent="center"
-        p={4}
-        textAlign="center"
-      >
-        <Text>View your render components here. </Text>
-        <Text>Select from the sidebar to see formik in action.</Text>
+      <GridItem w="100%" h="100%" p={4} textAlign="center" bg="gray.100">
+        <Flex
+          w="100%"
+          h="100%"
+          bgColor="gray.300"
+          borderRadius={5}
+          border="2px solid black"
+          flexDir="column"
+          alignItems="center"
+          justifyContent="center"
+          p={4}
+        >
+          <Text as="pre">View your render components here. </Text>
+          <Text as="pre">Select from the sidebar to see formik in action.</Text>
+        </Flex>
       </GridItem>
     )
   }

@@ -17,13 +17,23 @@ export default function SidebarHeader({
     <Flex
       flexDir="column"
       w="100%"
+      pt={4}
       onClick={() => setExpanded((prevState) => !prevState)}
+      _hover={{
+        cursor: 'pointer',
+      }}
     >
-      <Text fontFamily="inter">
+      <Text
+        fontWeight="black"
+        textTransform="uppercase"
+        letterSpacing={2}
+        fontSize="18px"
+        py={2}
+      >
         {isExpanded ? (
-          <ChevronDownIcon d="inline" mr={4} />
+          <ChevronDownIcon d="inline" mr={4} w={6} h={6} />
         ) : (
-          <ChevronRightIcon d="inline" mr={4} />
+          <ChevronRightIcon d="inline" mr={4} w={6} h={6} />
         )}
         {headerTitle}
       </Text>

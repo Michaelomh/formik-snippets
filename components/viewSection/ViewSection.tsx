@@ -16,7 +16,8 @@ export default function ViewSection({ text }: viewSectionProps) {
         justifyContent="center"
         p={4}
         textAlign="center"
-        bg="red.100"
+        bg="gray.100"
+        overflow="auto"
       >
         <Text>View your render components here. </Text>
         <Text>Select from the sidebar to see formik in action.</Text>
