@@ -5,8 +5,6 @@ type codeSectionProps = {
 }
 
 export default function CodeSection({ code }: codeSectionProps) {
-  console.log(code.match(/\n/g))
-
   if (!code) {
     return (
       <GridItem
