@@ -1,21 +1,31 @@
-import { Box, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex, GridItem, Text } from '@chakra-ui/react'
 
 type viewSectionProps = {
-  text?: string;
-};
+  text?: string
+}
 
 export default function ViewSection({ text }: viewSectionProps) {
   if (!text) {
     return (
-      <Flex w="100%" h="100%" flexDir="column" alignItems="center" justifyContent="center" p={4} textAlign="center">
+      <GridItem
+        display="flex"
+        w="100%"
+        h="100%"
+        flexDir="column"
+        alignItems="center"
+        justifyContent="center"
+        p={4}
+        textAlign="center"
+        bg="red.100"
+      >
         <Text>View your render components here. </Text>
         <Text>Select from the sidebar to see formik in action.</Text>
-      </Flex>
-    );
+      </GridItem>
+    )
   }
   return (
-    <Box w="100%" h="100%">
+    <GridItem w="100%" h="100%">
       This place contains Props section
-    </Box>
-  );
+    </GridItem>
+  )
 }
