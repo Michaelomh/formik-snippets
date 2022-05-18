@@ -11,17 +11,30 @@ import Image from 'next/image'
 import SidebarHeader from './SidebarHeader'
 import SidebarLink from './SidebarLink'
 import { SidebarContext } from './Sidebar.types'
+import SidebarSubheader from './SidebarSubHeader'
+import SidebarContextSwitcher from './SidebarContextSwitcher'
 
 export default function Sidebar() {
   const router = useRouter()
-  let currentContext
-  let currentPath
+  let currentContext = SidebarContext.useFormik.toString()
+  let currentPath = ''
+  let disableUseFormikButton = false
+  let disableFormikButton = false
 
-  if (router.pathname !== '/') {
+  if (router.pathname.split('/').length >= 2) {
     currentContext = router.pathname.split('/')[1]
-    currentPath = router.pathname.split('/')[2]
+    currentPath = router.pathname.split('/')[2] || ''
   }
 
+  console.log(currentPath)
+
+  // sometimes certain links only available in one option. we want to disable the other context button
+  if (currentPath) {
+    const noUseFormik = ['form', 'formik']
+    const noFormik = []
+    disableUseFormikButton = noUseFormik.includes(currentPath)
+    disableFormikButton = noFormik.includes(currentPath)
+  }
   return (
     <GridItem
       rowSpan={2}
@@ -75,71 +88,107 @@ export default function Sidebar() {
             />
           </SidebarHeader>
           <SidebarHeader headerTitle="Kitchen Sink">
-            <SidebarLink linkTitle="<Form>" link="form" />
-            <SidebarLink linkTitle="<Input>" />
-            <SidebarLink linkTitle="<Field>" />
-            <SidebarLink linkTitle="Button" />
-            <SidebarLink linkTitle="Text Area" />
-            <SidebarLink linkTitle="Option" />
-            <SidebarLink linkTitle="Radio" />
-            <SidebarLink linkTitle="Checkbox" />
-            <SidebarLink linkTitle="Date" />
-            <SidebarLink linkTitle="Validation" />
+            <SidebarLink
+              linkTitle="<Formik />"
+              link="formik"
+              context={SidebarContext.formik}
+              currentNavigation={currentPath}
+            />
+            <SidebarLink
+              linkTitle="<Form />"
+              link="form"
+              context={SidebarContext.formik}
+              currentNavigation={currentPath}
+            />
+            <SidebarLink
+              linkTitle="<ErrorMessage />"
+              context={currentContext}
+              currentNavigation={currentPath}
+            />
+            <SidebarLink
+              linkTitle="<Field>"
+              context={currentContext}
+              currentNavigation={currentPath}
+            />
+
+            <SidebarSubheader subheaderTitle="Button">
+              <SidebarLink
+                linkTitle="Basic Example"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
+
+            <SidebarSubheader subheaderTitle="Input / Text Area">
+              <SidebarLink
+                linkTitle="Basic Example"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
+            <SidebarSubheader subheaderTitle="Select / Option">
+              <SidebarLink
+                linkTitle="Basic Example"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
+
+            <SidebarSubheader subheaderTitle="Radio / Radio Group">
+              <SidebarLink
+                linkTitle="Basic Example"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="Chakra integration"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="Disabled"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
+            <SidebarSubheader subheaderTitle="Checkbox / Checkbox Group">
+              <SidebarLink
+                linkTitle="Basic Example"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="Chakra integration"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="Disabled"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
+            <SidebarSubheader subheaderTitle="Date">
+              <SidebarLink
+                linkTitle="Date"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
+            <SidebarLink
+              linkTitle="Yup Validation"
+              context={currentContext}
+              currentNavigation={currentPath}
+            />
           </SidebarHeader>
         </Flex>
       </Box>
-      <ButtonGroup
-        variant="solid"
-        bgColor={
-          currentContext === SidebarContext.useFormik
-            ? 'purple.700'
-            : 'green.800'
-        }
-        w="100%"
-        spacing="6"
-        p={'5%'}
-        position="absolute"
-        bottom={0}
-      >
-        <Button
-          colorScheme="purple"
-          w="45%"
-          size="sm"
-          isActive={currentContext === SidebarContext.useFormik}
-          bgColor="purple.800"
-          opacity="0.64"
-          _hover={{
-            opacity: 1,
-            bg: 'purple.600',
-          }}
-          _active={{
-            bg: 'purple.400',
-            opacity: 1,
-          }}
-          onClick={() => router.push(`/useFormik/${currentPath}`)}
-        >
-          useFormik
-        </Button>
-        <Button
-          colorScheme="green"
-          w="45%"
-          size="sm"
-          isActive={currentContext === SidebarContext.formik}
-          bgColor="green.800"
-          opacity="0.64"
-          _hover={{
-            opacity: 1,
-            bg: 'green.600',
-          }}
-          _active={{
-            bg: 'green.600',
-            opacity: 1,
-          }}
-          onClick={() => router.push(`/formik/${currentPath}`)}
-        >
-          {`<Formik>`}
-        </Button>
-      </ButtonGroup>
+      <SidebarContextSwitcher
+        context={currentContext}
+        path={currentPath}
+        disableFormikButton={disableFormikButton}
+        disableUseFormikButton={disableUseFormikButton}
+      />
     </GridItem>
   )
 }

@@ -28,6 +28,8 @@ export default function SidebarLink({
         _hover={{ bgColor: selectedColor, color: 'blackAlpha.700' }}
         bgColor={isSelected ? selectedColor : null}
         color={isSelected ? 'blackAlpha.700' : null}
+        fontWeight={isSelected ? 'black' : null}
+        letterSpacing={1}
       >
         {linkTitle}
       </Box>
