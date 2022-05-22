@@ -94,44 +94,42 @@ export default function FormikLoginForm() {
   validationSchema={validationSchema}
 >
 {(props) => (
-  <Formik>
-    <Form>
-      <FormControl isInvalid={props.errors.email && props.touched.email}>
-        <FormLabel htmlFor="email">Email Address</FormLabel>
-        <Field
-          as={Input}
-          id="email"
-          name="email"
-          type="email"
-        />
-        <FormErrorMessage>
-          {props.errors.email}
-        </FormErrorMessage>
-      </FormControl>
-      <FormControl isInvalid={props.errors.password && props.touched.password}>
-        <FormLabel htmlFor="password">Password</FormLabel>
-        <Field
-          as={Input}
-          id="password"
-          name="password"
-          type="password"
-        />
-        <FormErrorMessage>
-          {props.errors.password}
-        </FormErrorMessage>
-      </FormControl>
+  <Form>
+    <FormControl isInvalid={props.errors.email && props.touched.email}>
+      <FormLabel htmlFor="email">Email Address</FormLabel>
       <Field
-        as={Checkbox}
-        id="rememberMe"
-        name="rememberMe"
-      >
-        Remember me?
-      </Field>
-      <Button type="submit" colorScheme="green" width="full">
-        Login
-      </Button>
-    </Form>
-  </Formik>
+        as={Input}
+        id="email"
+        name="email"
+        type="email"
+      />
+      <FormErrorMessage>
+        {props.errors.email}
+      </FormErrorMessage>
+    </FormControl>
+    <FormControl isInvalid={props.errors.password && props.touched.password}>
+      <FormLabel htmlFor="password">Password</FormLabel>
+      <Field
+        as={Input}
+        id="password"
+        name="password"
+        type="password"
+      />
+      <FormErrorMessage>
+        {props.errors.password}
+      </FormErrorMessage>
+    </FormControl>
+    <Field
+      as={Checkbox}
+      id="rememberMe"
+      name="rememberMe"
+    >
+      Remember me?
+    </Field>
+    <Button type="submit" colorScheme="green" width="full">
+      Login
+    </Button>
+  </Form>
 )}`}
             />
           </>
