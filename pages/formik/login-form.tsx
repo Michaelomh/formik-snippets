@@ -4,6 +4,7 @@ import {
   Checkbox,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormLabel,
   GridItem,
   Input,
@@ -12,7 +13,15 @@ import {
 import CodeSection from '@components/codeSection/CodeSection'
 import Layout from '@components/Layout'
 import PropsSection from '@components/propsSection/PropsSection'
-import { Form, Formik } from 'formik'
+import { ErrorMessage, Field, Form, Formik } from 'formik'
+import * as Yup from 'yup'
+
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email('Not a vaild email account')
+    .required('Field cannot be empty'),
+  password: Yup.string().required('Password cannot be empty'),
+})
 
 export default function FormikLoginForm() {
   return (
@@ -20,6 +29,7 @@ export default function FormikLoginForm() {
       <Formik
         initialValues={{ email: '', password: '', rememberMe: false }}
         onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+        validationSchema={validationSchema}
       >
         {(props) => (
           <>
@@ -28,37 +38,46 @@ export default function FormikLoginForm() {
                 <Box bg="white" p={6} rounded="md">
                   <Form>
                     <VStack spacing={4} align="flex-start">
-                      <FormControl>
+                      <FormControl
+                        isInvalid={props.errors.email && props.touched.email}
+                      >
                         <FormLabel htmlFor="email">Email Address</FormLabel>
-                        <Input
+                        <Field
+                          as={Input}
                           id="email"
                           name="email"
                           type="email"
                           variant="filled"
-                          onChange={props.handleChange}
-                          value={props.values.email}
                         />
+                        <FormErrorMessage>
+                          {props.errors.email}
+                        </FormErrorMessage>
                       </FormControl>
-                      <FormControl>
+                      <FormControl
+                        isInvalid={
+                          props.errors.password && props.touched.password
+                        }
+                      >
                         <FormLabel htmlFor="password">Password</FormLabel>
-                        <Input
+                        <Field
+                          as={Input}
                           id="password"
                           name="password"
                           type="password"
                           variant="filled"
-                          onChange={props.handleChange}
-                          value={props.values.email}
                         />
+                        <FormErrorMessage>
+                          {props.errors.password}
+                        </FormErrorMessage>
                       </FormControl>
-                      <Checkbox
+                      <Field
+                        as={Checkbox}
                         id="rememberMe"
                         name="rememberMe"
                         colorScheme="green"
-                        onChange={props.handleChange}
-                        value={props.values.email}
                       >
                         Remember me?
-                      </Checkbox>
+                      </Field>
                       <Button type="submit" colorScheme="green" width="full">
                         Login
                       </Button>
@@ -68,7 +87,53 @@ export default function FormikLoginForm() {
               </Flex>
             </GridItem>
             <PropsSection props={props} />
-            <CodeSection />
+            <CodeSection
+              code={`<Formik
+  initialValues={{ email: '', password: '', rememberMe: false }}
+  onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
+  validationSchema={validationSchema}
+>
+{(props) => (
+  <Formik>
+    <Form>
+      <FormControl isInvalid={props.errors.email && props.touched.email}>
+        <FormLabel htmlFor="email">Email Address</FormLabel>
+        <Field
+          as={Input}
+          id="email"
+          name="email"
+          type="email"
+        />
+        <FormErrorMessage>
+          {props.errors.email}
+        </FormErrorMessage>
+      </FormControl>
+      <FormControl isInvalid={props.errors.password && props.touched.password}>
+        <FormLabel htmlFor="password">Password</FormLabel>
+        <Field
+          as={Input}
+          id="password"
+          name="password"
+          type="password"
+        />
+        <FormErrorMessage>
+          {props.errors.password}
+        </FormErrorMessage>
+      </FormControl>
+      <Field
+        as={Checkbox}
+        id="rememberMe"
+        name="rememberMe"
+      >
+        Remember me?
+      </Field>
+      <Button type="submit" colorScheme="green" width="full">
+        Login
+      </Button>
+    </Form>
+  </Formik>
+)}`}
+            />
           </>
         )}
       </Formik>
