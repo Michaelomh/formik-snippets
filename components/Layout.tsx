@@ -10,7 +10,7 @@ export default function Layout({ children }) {
         w="100vw"
         h="100vh"
         templateRows="50% 50%"
-        templateColumns="minmax(300px, 400px) 1fr  1fr"
+        templateColumns="20% 40% 40%"
       >
         <Sidebar />
         {children}

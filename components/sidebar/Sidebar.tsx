@@ -102,6 +102,7 @@ export default function Sidebar() {
             />
             <SidebarLink
               linkTitle="<ErrorMessage />"
+              link="errorMessage"
               context={currentContext}
               currentNavigation={currentPath}
             />
@@ -122,6 +123,13 @@ export default function Sidebar() {
             <SidebarSubheader subheaderTitle="Input / Text Area">
               <SidebarLink
                 linkTitle="Basic Example"
+                link="input-textarea/basics"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="Chakra UI"
+                link="input-textarea/chakra"
                 context={currentContext}
                 currentNavigation={currentPath}
               />
@@ -129,6 +137,13 @@ export default function Sidebar() {
             <SidebarSubheader subheaderTitle="Select / Option">
               <SidebarLink
                 linkTitle="Basic Example"
+                link="select-option/basics"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="Chakra UI"
+                link="select-option/chakra"
                 context={currentContext}
                 currentNavigation={currentPath}
               />
@@ -175,11 +190,39 @@ export default function Sidebar() {
                 currentNavigation={currentPath}
               />
             </SidebarSubheader>
-            <SidebarLink
-              linkTitle="Yup Validation"
-              context={currentContext}
-              currentNavigation={currentPath}
-            />
+            <SidebarSubheader subheaderTitle="Yup + Validation">
+              <SidebarLink
+                linkTitle="string"
+                link="validation/string"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="number"
+                link="validation/number"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="select"
+                link="validation/select"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+              <SidebarLink
+                linkTitle="boolean"
+                link="validation/boolean"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+
+              <SidebarLink
+                linkTitle="custom"
+                link="validation/custom"
+                context={currentContext}
+                currentNavigation={currentPath}
+              />
+            </SidebarSubheader>
           </SidebarHeader>
         </Flex>
       </Box>

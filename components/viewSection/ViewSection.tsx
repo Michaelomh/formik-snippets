@@ -19,7 +19,7 @@ export default function ViewSection({ text }: viewSectionProps) {
         bg="gray.100"
         overflow="auto"
       >
-        <Text>View your render components here. </Text>
+        <Text>View your rendered components here. </Text>
         <Text>Select from the sidebar to see formik in action.</Text>
       </GridItem>
     )

@@ -16,7 +16,7 @@ export default function CodeSection({ code }: codeSectionProps) {
             justifyContent="center"
             w="100%"
           >
-            <Text as="pre">View your render components here. </Text>
+            <Text as="pre">View your Code here. </Text>
             <Text as="pre">
               Select from the sidebar to see formik in action.
             </Text>

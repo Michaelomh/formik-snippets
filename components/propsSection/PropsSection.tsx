@@ -1,7 +1,7 @@
 import { Box, Flex, GridItem, Text } from '@chakra-ui/react'
 
 type propsSectionProps = {
-  props?: object
+  props?: object | string
 }
 
 export default function PropsSection({ props }: propsSectionProps) {
@@ -19,7 +19,7 @@ export default function PropsSection({ props }: propsSectionProps) {
           justifyContent="center"
           p={4}
         >
-          <Text as="pre">View your render components here. </Text>
+          <Text as="pre">View your notes here. </Text>
           <Text as="pre">Select from the sidebar to see formik in action.</Text>
         </Flex>
       </GridItem>
@@ -37,7 +37,7 @@ export default function PropsSection({ props }: propsSectionProps) {
         p={4}
       >
         <Text as="pre" fontSize="18px" h="100%" overflow="auto">
-          {JSON.stringify(props, null, 4)}
+          {typeof props === 'object' ? JSON.stringify(props, null, 4) : props}
         </Text>
       </Box>
     </GridItem>

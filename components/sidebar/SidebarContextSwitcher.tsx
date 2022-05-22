@@ -70,7 +70,7 @@ export default function SidebarContextSwitcher({
           },
         }}
         _active={{
-          bg: 'green.600',
+          bg: 'green.400',
           opacity: 1,
         }}
         onClick={() => router.push(`/formik/${path}`)}
