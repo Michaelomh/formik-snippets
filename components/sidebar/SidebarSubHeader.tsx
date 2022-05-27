@@ -4,14 +4,20 @@ import { useState } from 'react'
 
 type SidebarHeaderProps = {
   children: React.ReactNode
+  currentPath?: string
   subheaderTitle: string
+  subheaderLink?: string
 }
 
 export default function SidebarSubheader({
   children,
+  currentPath,
+  subheaderLink,
   subheaderTitle,
 }: SidebarHeaderProps) {
-  const [isExpanded, setExpanded] = useState(false)
+  const [isExpanded, setExpanded] = useState(
+    currentPath.indexOf(subheaderLink) >= 0
+  )
 
   return (
     <Flex
@@ -25,7 +31,16 @@ export default function SidebarSubheader({
         cursor: 'pointer',
       }}
     >
-      <Text fontSize="16px" pl={8} py={1} letterSpacing={1} fontWeight="bold">
+      <Text
+        fontSize="16px"
+        pl={8}
+        py={1}
+        letterSpacing={1}
+        fontWeight="bold"
+        whiteSpace="nowrap"
+        overflow="hidden"
+        textOverflow="ellipsis"
+      >
         {isExpanded ? (
           <ChevronDownIcon d="inline" mr={2} />
         ) : (
