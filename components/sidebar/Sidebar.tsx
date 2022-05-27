@@ -1,37 +1,33 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  GridItem,
-  Link,
-} from '@chakra-ui/react'
-import { useRouter } from 'next/router'
+import { Box, Flex, GridItem, Link } from '@chakra-ui/react'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { noFormik, noUseFormik } from './Sidebar.constants'
+import { SidebarContext } from './Sidebar.types'
+import SidebarContextSwitcher from './SidebarContextSwitcher'
 import SidebarHeader from './SidebarHeader'
 import SidebarLink from './SidebarLink'
-import { SidebarContext } from './Sidebar.types'
 import SidebarSubheader from './SidebarSubHeader'
-import SidebarContextSwitcher from './SidebarContextSwitcher'
 
 export default function Sidebar() {
   const router = useRouter()
-  let currentContext = SidebarContext.useFormik.toString()
-  let currentPath = ''
+  let currentContext
+  let currentPath
   let disableUseFormikButton = false
   let disableFormikButton = false
 
   if (router.pathname.split('/').length >= 2) {
-    currentContext = router.pathname.split('/')[1]
-    currentPath = router.pathname.split('/')[2] || ''
+    const url = router.pathname.split('/')
+    url.shift() // ignore the first element
+    currentContext = url.shift()
+    currentPath = url.join('/')
   }
 
-  console.log(currentPath)
+  if (!currentContext) {
+    currentContext = SidebarContext.useFormik.toString()
+  }
 
   // sometimes certain links only available in one option. we want to disable the other context button
   if (currentPath) {
-    const noUseFormik = ['form', 'formik']
-    const noFormik = []
     disableUseFormikButton = noUseFormik.includes(currentPath)
     disableFormikButton = noFormik.includes(currentPath)
   }
@@ -91,13 +87,13 @@ export default function Sidebar() {
             <SidebarLink
               linkTitle="<Formik />"
               link="formik"
-              context={SidebarContext.formik}
+              context={currentContext}
               currentNavigation={currentPath}
             />
             <SidebarLink
               linkTitle="<Form />"
               link="form"
-              context={SidebarContext.formik}
+              context={currentContext}
               currentNavigation={currentPath}
             />
             <SidebarLink
@@ -111,16 +107,11 @@ export default function Sidebar() {
               context={currentContext}
               currentNavigation={currentPath}
             />
-
-            <SidebarSubheader subheaderTitle="Button">
-              <SidebarLink
-                linkTitle="Basic Example"
-                context={currentContext}
-                currentNavigation={currentPath}
-              />
-            </SidebarSubheader>
-
-            <SidebarSubheader subheaderTitle="Input / Text Area">
+            <SidebarSubheader
+              currentPath={currentPath}
+              subheaderTitle="Input / Text Area"
+              subheaderLink="input-textarea"
+            >
               <SidebarLink
                 linkTitle="Basic Example"
                 link="input-textarea/basics"
@@ -134,7 +125,11 @@ export default function Sidebar() {
                 currentNavigation={currentPath}
               />
             </SidebarSubheader>
-            <SidebarSubheader subheaderTitle="Select / Option">
+            <SidebarSubheader
+              currentPath={currentPath}
+              subheaderTitle="Select / Option"
+              subheaderLink="select-option"
+            >
               <SidebarLink
                 linkTitle="Basic Example"
                 link="select-option/basics"
@@ -149,7 +144,11 @@ export default function Sidebar() {
               />
             </SidebarSubheader>
 
-            <SidebarSubheader subheaderTitle="Radio / Radio Group">
+            <SidebarSubheader
+              currentPath={currentPath}
+              subheaderTitle="Radio / Radio Group"
+              subheaderLink="radio"
+            >
               <SidebarLink
                 linkTitle="Basic Example"
                 context={currentContext}
@@ -166,7 +165,11 @@ export default function Sidebar() {
                 currentNavigation={currentPath}
               />
             </SidebarSubheader>
-            <SidebarSubheader subheaderTitle="Checkbox / Checkbox Group">
+            <SidebarSubheader
+              currentPath={currentPath}
+              subheaderTitle="Checkbox / Checkbox Group"
+              subheaderLink="checkbox"
+            >
               <SidebarLink
                 linkTitle="Basic Example"
                 context={currentContext}
@@ -183,14 +186,22 @@ export default function Sidebar() {
                 currentNavigation={currentPath}
               />
             </SidebarSubheader>
-            <SidebarSubheader subheaderTitle="Date">
+            <SidebarSubheader
+              currentPath={currentPath}
+              subheaderTitle="Date"
+              subheaderLink="date"
+            >
               <SidebarLink
                 linkTitle="Date"
                 context={currentContext}
                 currentNavigation={currentPath}
               />
             </SidebarSubheader>
-            <SidebarSubheader subheaderTitle="Yup + Validation">
+            <SidebarSubheader
+              currentPath={currentPath}
+              subheaderTitle="Yup + Validation"
+              subheaderLink="validation"
+            >
               <SidebarLink
                 linkTitle="string"
                 link="validation/string"
