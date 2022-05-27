@@ -1,10 +1,19 @@
-import { Box, Flex, GridItem, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  GridItem,
+  VStack,
+  Select,
+} from '@chakra-ui/react'
 import CodeSection from '@components/codeSection/CodeSection'
 import Layout from '@components/Layout'
 import PropsSection from '@components/propsSection/PropsSection'
-import { Form, Formik } from 'formik'
+import { Field, Form, Formik } from 'formik'
 import { object, string } from 'yup'
-import { Select } from './Select'
 
 export default function FormikSelectChakra() {
   return (
@@ -23,7 +32,19 @@ export default function FormikSelectChakra() {
                 <Box bg="white" p={6} rounded="md">
                   <Form>
                     <VStack spacing={4} align="flex-start">
-                      <Select errors={props.errors} touched={props.touched} />
+                      <FormControl
+                        isInvalid={props.errors.color && props.touched.color}
+                      >
+                        <FormLabel htmlFor="color">Color</FormLabel>
+                        <Field name="color" as={Select}>
+                          <option value="red">Red</option>
+                          <option value="green">Green</option>
+                          <option value="blue">Blue</option>
+                          <option value="error">ERROR</option>
+                        </Field>
+                        <FormErrorMessage>Error Message</FormErrorMessage>
+                        <FormHelperText>Helper Text</FormHelperText>
+                      </FormControl>
                     </VStack>
                   </Form>
                 </Box>
